@@ -23,6 +23,7 @@ using RestaurantAPI.Middleware;
 using RestaurantAPI.Models;
 using RestaurantAPI.Models.Validators;
 using RestaurantAPI.Services;
+using Bogus;
 
 namespace RestaurantAPI
 {

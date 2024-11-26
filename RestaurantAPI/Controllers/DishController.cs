@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantAPI.Models;
 using RestaurantAPI.Services;
@@ -11,6 +12,7 @@ namespace RestaurantAPI.Controllers
 {
     [Route("api/restaurant/{restaurantId}/dish")]
     [ApiController]
+    [Authorize]
     public class DishController : ControllerBase
     {
         private readonly IDishService _dishService;
