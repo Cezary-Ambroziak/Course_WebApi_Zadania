@@ -40,7 +40,7 @@ namespace RestaurantAPI
                     _dbContext.Restaurants.AddRange(restaurants1);
                     _dbContext.SaveChanges();
                 }
-                if (_dbContext.Dishes.Any())
+                if (!_dbContext.Dishes.Any())
                 {
                     var dishes50 = GetDish();
                     _dbContext.Dishes.AddRange(dishes50);

@@ -12,7 +12,7 @@ namespace RestaurantAPI.Controllers
 {
     [Route("api/restaurant/{restaurantId}/dish")]
     [ApiController]
-    [Authorize]
+
     public class DishController : ControllerBase
     {
         private readonly IDishService _dishService;
@@ -23,9 +23,10 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Policy = "Minimum3Dishes")]
         public ActionResult Delete([FromRoute] int restaurantId)
         {
-            _dishService.RemoveAll(restaurantId);
+            _dishService.RemoveLastThree(restaurantId);
 
             return NoContent();
         }

@@ -61,8 +61,6 @@ namespace RestaurantAPI.Controllers
             return NoContent();
         }
 
-
-
         [HttpGet("{id}")]
         [AllowAnonymous]
         public ActionResult<RestaurantDto> Get([FromRoute] int id)
