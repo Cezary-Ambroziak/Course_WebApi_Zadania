@@ -69,7 +69,9 @@ namespace RestaurantAPI.Services
         {
             var restaurant = GetRestaurantById(restaurantId);
 
-            _context.RemoveRange(restaurant.Dishes.Count - 3);
+            var threeLastDishes = restaurant.Dishes.GetRange(restaurant.Dishes.Count - 3,3);
+
+            _context.RemoveRange(threeLastDishes);
             _context.SaveChanges();
 
         }

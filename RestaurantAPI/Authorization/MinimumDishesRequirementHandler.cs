@@ -38,7 +38,7 @@ namespace RestaurantAPI.Authorization
 
             int valueOfDishesSpecificRestaurants = createdDishesCount[restaurntId];
 
-            if (1 >= requirement.MinimumDishes)
+            if (valueOfDishesSpecificRestaurants >= requirement.MinimumDishes)
             {
                 context.Succeed(requirement);
             }
