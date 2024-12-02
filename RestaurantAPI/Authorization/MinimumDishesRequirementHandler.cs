@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using RestaurantAPI.Entities;
 using RestaurantAPI.Services;
 
@@ -28,11 +29,16 @@ namespace RestaurantAPI.Authorization
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
             MinimumDishesRequirement requirement)
         {
-            var createdDishesCount = _context.Dishes.GroupBy(d => d.RestaurantId).Count();
 
-            string restaurantId = _contextAccessor.HttpContext.Request.PathBase;
+            var createdDishesCount = _context.Dishes.ToList().GroupBy(d => d.RestaurantId).ToDictionary(r => r.Key, d => d.Count());
 
-            if (createdDishesCount >= requirement.MinimumDishes)
+            var httpcontext = _contextAccessor.HttpContext;
+
+            int restaurntId = int.Parse(httpcontext.Request.RouteValues["restaurantId"].ToString());
+
+            int valueOfDishesSpecificRestaurants = createdDishesCount[restaurntId];
+
+            if (1 >= requirement.MinimumDishes)
             {
                 context.Succeed(requirement);
             }
